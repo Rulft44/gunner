@@ -1,6 +1,9 @@
 {
 	"model": {
-		"type": "minecraft:model",
-		"model": "gunner:item/confetti_gun"
+		"type": "minecraft:special",
+		"base": "gunner:item/confetti_gun",
+		"model": {
+			"type": "geckolib:geckolib"
+		}
 	}
 }
