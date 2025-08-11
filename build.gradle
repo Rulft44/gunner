@@ -10,6 +10,10 @@ version = "$modVersion+$branchName"
 archivesBaseName = project.slug
 
 repositories {
+	maven {
+		name = "Modrinth"
+		url = "https://api.modrinth.com/maven"
+	}
 }
 
 dependencies {
@@ -18,6 +22,9 @@ dependencies {
 
 	modImplementation libs.fl
 	modImplementation libs.fapi
+
+	// Confetti Lib
+	modImplementation "maven.modrinth:confetti-lib:1.3.3+1.21.8"
 }
 
 processResources {
@@ -76,4 +83,8 @@ modrinth {
 	dependencies {
 		required.version "fabric-api", libs.versions.fapi.get()
 	}
+}
+
+fabricApi {
+	configureDataGeneration()
 }

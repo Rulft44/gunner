@@ -1,2 +1,6 @@
 {
+	"item.gunner.confetti_gun": "Confetti Gun",
+	"enchantment.gunner.recoil": "Recoil",
+	"enchantment.gunner.recoil.desc": "Recoils you back when shooting.",
+	"tag.item.gunner.recoil_enchantable": "Recoil Enchantable"
 }

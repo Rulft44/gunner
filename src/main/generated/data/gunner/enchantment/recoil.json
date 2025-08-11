@@ -1,0 +1,36 @@
+{
+  "anvil_cost": 5,
+  "description": {
+    "translate": "enchantment.gunner.recoil"
+  },
+  "effects": {
+    "minecraft:post_attack": [
+      {
+        "affected": "attacker",
+        "effect": {
+          "type": "gunner:recoil_effect",
+          "amount": {
+            "type": "minecraft:linear",
+            "base": 0.4,
+            "per_level_above_first": 0.2
+          }
+        },
+        "enchanted": "attacker"
+      }
+    ]
+  },
+  "max_cost": {
+    "base": 1,
+    "per_level_above_first": 15
+  },
+  "max_level": 4,
+  "min_cost": {
+    "base": 1,
+    "per_level_above_first": 10
+  },
+  "slots": [
+    "hand"
+  ],
+  "supported_items": "#gunner:recoil_enchantable",
+  "weight": 10
+}

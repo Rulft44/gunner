@@ -1,19 +1,21 @@
 <!--suppress HtmlDeprecatedTag, XmlDeprecatedElement -->
-<center><img alt="mod preview" src="https://upload.wikimedia.org/wikipedia/commons/7/70/Example.png"/></center>
 
 <center>
-A short quick summary of this mod
+Use the Confetti Gun to move yourself around and damage foes.
 </center>
 
----
-
-A long description of your mod, including 
-- Dot point lists of all features
-
-`path/to/config/files` if you have them
-
-Screenshots of features where possible
 
 ---
 
-A footnote for special thanks, credits, and other shoutouts - including "created at modfest" banners.
+This mod adds the **Confetti Gun** which shoots confetti alongside fun enchantments.
+
+### **Enchantments:**
+- **Recoil I-IV**: Makes the gun recoil
+
+
+---
+
+Special thanks to the amazing people at the Modfest Discord for all the help.
+
+[![Made for: Modfest Toybox](https://raw.githubusercontent.com/ModFest/art/refs/heads/v2/badge/svg/toybox/cozy.svg)](https://modfest.net/toybox)
+

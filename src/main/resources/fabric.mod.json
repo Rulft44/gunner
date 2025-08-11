@@ -32,6 +32,9 @@
 			"io.github.rulft44.gunner.Gunner"
 		],
 		"client": [
+		],
+		"fabric-datagen": [
+			"io.github.rulft44.gunner.ModDataGenerator"
 		]
 	}
 }
