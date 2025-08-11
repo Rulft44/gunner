@@ -14,6 +14,18 @@ repositories {
 		name = "Modrinth"
 		url = "https://api.modrinth.com/maven"
 	}
+
+	exclusiveContent {
+		forRepository {
+			maven {
+				name = 'GeckoLib'
+				url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+			}
+		}
+		filter {
+			includeGroup('software.bernie.geckolib')
+		}
+	}
 }
 
 dependencies {
@@ -24,7 +36,11 @@ dependencies {
 	modImplementation libs.fapi
 
 	// Confetti Lib
-	modImplementation "maven.modrinth:confetti-lib:1.3.3+1.21.8"
+	modImplementation "maven.modrinth:confetti-lib:${confettiVersion}+${compatibleVersions}"
+
+	// GeckoLib
+	modImplementation "software.bernie.geckolib:geckolib-fabric-${compatibleVersions}:${geckolibVersion}"
+
 }
 
 processResources {
