@@ -7,9 +7,6 @@
 	"authors": [
 		"${authors}"
 	],
-	"contributors": [
-		"${contributors}"
-	],
 	"contact": {
 		"homepage": "${homepage}",
 		"issues": "${issues}",
@@ -24,10 +21,13 @@
 		"minecraft": ">=${mc}",
 		"fabricloader": ">=${fl}",
 		"fabric-api": ">=${fapi}",
+		"cloth-config": "*",
+		"architectury": "*",
 		"geckolib": "*"
 	},
 	"suggests": {
-		"enchdesc": "*"
+		"enchdesc": "*",
+		"modmenu": "*"
 	},
 	"entrypoints": {
 		"main": [

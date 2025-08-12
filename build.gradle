@@ -10,6 +10,9 @@ version = "$modVersion+$branchName"
 archivesBaseName = project.slug
 
 repositories {
+	maven { url "https://maven.shedaniel.me/" }
+	maven { url "https://maven.terraformersmc.com/releases/" }
+
 	maven {
 		name = "Modrinth"
 		url = "https://api.modrinth.com/maven"
@@ -26,6 +29,10 @@ repositories {
 			includeGroup('software.bernie.geckolib')
 		}
 	}
+
+	maven { url "https://maven.architectury.dev/" }
+
+	maven { url "https://maven.terraformersmc.com/releases/" }
 }
 
 dependencies {
@@ -41,6 +48,20 @@ dependencies {
 	// GeckoLib
 	modImplementation "software.bernie.geckolib:geckolib-fabric-${compatibleVersions}:${geckolibVersion}"
 
+	// Cloth Config
+	modApi("me.shedaniel.cloth:cloth-config-fabric:${clothConfigVersion}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
+
+	// Architectury API
+	modApi "dev.architectury:architectury-fabric:${architecturyVersion}"
+
+	// Mod Menu
+	modApi "com.terraformersmc:modmenu:${modMenuVersion}"
+
+	// REI (Testing purposes)
+	modImplementation "maven.modrinth:rei:20.0.811+fabric"
+
 }
 
 processResources {
@@ -54,8 +75,7 @@ processResources {
 		sources       : "https://github.com/${user}/${slug}",
 		license       : license,
 		authors       : authors.split(", ").join("\",\n    \""),
-		contributors  : contributors.split(", ").join("\",\n    \""),
-		members       : "${authors}${contributors ? ". Contributions by ${contributors}." : ""}",
+		members       : "${authors}",
 		mc            : compatibleVersions.split(", ")[0],
 		fl            : libs.versions.fl.get(),
 		fapi          : libs.versions.fapi.get(),
