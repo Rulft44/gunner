@@ -74,24 +74,22 @@ public class ConfettiGunItem extends Item implements GeoItem {
 				ServerPlayNetworking.send((ServerPlayerEntity) serverPlayer, new ExtendedParticlePacket(new Vec3Dist(pos, 0), new Vec3Dist(forward.multiply(0.8), new Vec3d(.25, .25, .25)), 70, false, Confetti.CONFETTI));
 			});
 
-
-
-
-			if (!user.isSneaking() && hasEnchantment(user.getStackInHand(hand), ModEnchantmentEffects.RECOIL)) {
-				getUseAction(user.getStackInHand(hand));
-				if(world instanceof ServerWorld serverWorld)
+			if (!user.isSneaking()) {
+				if (world instanceof ServerWorld serverWorld){
 					triggerAnim(user, GeoItem.getOrAssignId(user.getStackInHand(hand), serverWorld), "fire_controller", "fire");
+				}
+				if(hasEnchantment(user.getStackInHand(hand), ModEnchantmentEffects.RECOIL)){
+					int level = getLevel(user.getStackInHand(hand), ModEnchantmentEffects.RECOIL);
+					float pitch = user.getPitch(1);
+					float pitchFactor = (pitch + 90F) / 180F;
+					float recoilAmount = level * 0.15F * pitchFactor;
+					Vec3d backward = forward.multiply(-recoilAmount);
+					double upwardBoost = 0.15 * pitchFactor * level;
+					Vec3d finalRecoil = new Vec3d(backward.x, backward.y + upwardBoost, backward.z);
 
-				int level = getLevel(user.getStackInHand(hand), ModEnchantmentEffects.RECOIL);
-				float pitch = user.getPitch(1);
-				float pitchFactor = (pitch + 90F) / 180F;
-				float recoilAmount = level * 0.15F * pitchFactor;
-				Vec3d backward = forward.multiply(-recoilAmount);
-				double upwardBoost = 0.15 * pitchFactor * level;
-				Vec3d finalRecoil = new Vec3d(backward.x, backward.y + upwardBoost, backward.z);
-
-				user.addVelocity(finalRecoil.x, finalRecoil.y, finalRecoil.z);
-				user.velocityModified = true;
+					user.addVelocity(finalRecoil.x, finalRecoil.y, finalRecoil.z);
+					user.velocityModified = true;
+				}
 			}
 		}
 

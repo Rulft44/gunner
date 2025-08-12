@@ -2,7 +2,7 @@
 	"format_version": "1.8.0",
 	"animations": {
 		"fire": {
-			"animation_length": 0.9583,
+			"animation_length": 0.5,
 			"bones": {
 				"bone": {
 					"rotation": {
@@ -12,31 +12,29 @@
 							},
 							"lerp_mode": "catmullrom"
 						},
-						"0.0417": {
+						"0.125": {
 							"post": {
-								"vector": [27.5, 0, 0]
+								"vector": [-180, 0, 0]
 							},
 							"lerp_mode": "catmullrom"
 						},
 						"0.25": {
 							"post": {
-								"vector": [-52.5, 0, 0]
+								"vector": [-360, 0, 0]
 							},
 							"lerp_mode": "catmullrom"
 						},
-						"0.5": {
+						"0.375": {
 							"post": {
 								"vector": [-540, 0, 0]
 							},
 							"lerp_mode": "catmullrom"
 						},
-						"0.75": {
-							"vector": [-735, 0, 0],
-							"easing": "easeInOutSine"
-						},
-						"0.8333": {
-							"vector": [-720, 0, 0],
-							"easing": "easeOutSine"
+						"0.5": {
+							"post": {
+								"vector": [-720, 0, 0]
+							},
+							"lerp_mode": "catmullrom"
 						}
 					}
 				}
