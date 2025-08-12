@@ -62,7 +62,7 @@ public class ConfettiGunItem extends Item implements GeoItem {
 	public ActionResult use(World world, PlayerEntity user, Hand hand) {
 		var forward = user.getRotationVec(1);
 
-		if (!world.isClient()) {
+		if (world instanceof ServerWorld serverWorld) {
 			var right = forward.crossProduct(new Vec3d(0, 1.7, 0));
 
 			var pos = user.getPos()
@@ -70,14 +70,15 @@ public class ConfettiGunItem extends Item implements GeoItem {
 				.add(right.multiply(.3))
 				.add(forward.multiply(.5));
 
+			// Send Confetti Particles
 			world.getPlayers().forEach(serverPlayer -> {
 				ServerPlayNetworking.send((ServerPlayerEntity) serverPlayer, new ExtendedParticlePacket(new Vec3Dist(pos, 0), new Vec3Dist(forward.multiply(0.8), new Vec3d(.25, .25, .25)), 70, false, Confetti.CONFETTI));
 			});
 
+			// Trigger Gun Spinning Animation
+			triggerAnim(user, GeoItem.getOrAssignId(user.getStackInHand(hand), serverWorld), "fire_controller", "fire");
+
 			if (!user.isSneaking()) {
-				if (world instanceof ServerWorld serverWorld){
-					triggerAnim(user, GeoItem.getOrAssignId(user.getStackInHand(hand), serverWorld), "fire_controller", "fire");
-				}
 				if(hasEnchantment(user.getStackInHand(hand), ModEnchantmentEffects.RECOIL)){
 					int level = getLevel(user.getStackInHand(hand), ModEnchantmentEffects.RECOIL);
 					float pitch = user.getPitch(1);
@@ -87,6 +88,7 @@ public class ConfettiGunItem extends Item implements GeoItem {
 					double upwardBoost = 0.15 * pitchFactor * level;
 					Vec3d finalRecoil = new Vec3d(backward.x, backward.y + upwardBoost, backward.z);
 
+					// Apply Recoil
 					user.addVelocity(finalRecoil.x, finalRecoil.y, finalRecoil.z);
 					user.velocityModified = true;
 				}
@@ -130,7 +132,6 @@ public class ConfettiGunItem extends Item implements GeoItem {
 			public @Nullable GeoItemRenderer<ConfettiGunItem> getGeoItemRenderer() {
 				if (this.renderer == null)
 					this.renderer = new ConfettiGunGeoItemRenderer();
-				// Defer creation of our renderer then cache it so that it doesn't get instantiated too early
 
 				return this.renderer;
 			}

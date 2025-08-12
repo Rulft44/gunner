@@ -18,6 +18,7 @@ public record RecoilEnchantmentEffect(EnchantmentLevelBasedValue amount) impleme
 
 	@Override
 	public void apply(ServerWorld world, int level, EnchantmentEffectContext context, Entity user, Vec3d pos) {
+		// The Enchantment Effect does not have functionality in here, it's in the ConfettiGunItem.java class.
 	}
 
 	@Override

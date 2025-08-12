@@ -43,7 +43,7 @@ public class EnchantmentGenerator extends FabricDynamicRegistryProvider {
 					)
 				)
 				.addEffect(
-					EnchantmentEffectComponentTypes.POST_ATTACK,
+					EnchantmentEffectComponentTypes.POST_ATTACK, // This EnchantmentEffectComponentType is useless
 					EnchantmentEffectTarget.ATTACKER,
 					EnchantmentEffectTarget.ATTACKER,
 					new RecoilEnchantmentEffect(EnchantmentLevelBasedValue.linear(0.4f, 0.2f)) // scale the enchantment linearly.
