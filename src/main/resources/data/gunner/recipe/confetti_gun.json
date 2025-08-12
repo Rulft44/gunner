@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"   ",
+		"#Gi",
+		"  i"
+	],
+	"key": {
+		"#": "minecraft:breeze_rod",
+		"G": "gunner:gun_component",
+		"i": "minecraft:iron_ingot"
+	},
+	"result": {
+		"id": "gunner:confetti_gun",
+		"count": 1
+	}
+}

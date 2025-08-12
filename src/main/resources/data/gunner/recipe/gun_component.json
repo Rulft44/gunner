@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"iIi",
+		"iGi",
+		"iTi"
+	],
+	"key": {
+		"i": "minecraft:iron_ingot",
+		"I": "minecraft:iron_nugget",
+		"G": "minecraft:gunpowder",
+		"T": "#c:dyes"
+	},
+	"result": {
+		"id": "gunner:gun_component",
+		"count": 1
+	}
+}

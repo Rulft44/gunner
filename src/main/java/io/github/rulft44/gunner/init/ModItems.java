@@ -28,9 +28,12 @@ public class ModItems {
 	}
 
 	public static final Item CONFETTI_GUN = register("confetti_gun", ConfettiGunItem::new, new Item.Settings().maxCount(1).enchantable(2).useCooldown(0.5f));
+	public static final Item GUN_COMPONENT = register("gun_component", Item::new, new Item.Settings().maxCount(16));
 
 	public static void initialize() {
-			ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS)
+			ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS)
 			.register((itemGroup) -> itemGroup.add(ModItems.CONFETTI_GUN));
+			ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS)
+			.register((itemGroup) -> itemGroup.add(ModItems.GUN_COMPONENT));
 	}
 }
