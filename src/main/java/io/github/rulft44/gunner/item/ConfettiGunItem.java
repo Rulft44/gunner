@@ -16,6 +16,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
@@ -53,14 +54,13 @@ public class ConfettiGunItem extends Item implements GeoItem {
 		return 0;
 	}
 
-	@Override
-	public boolean isUsedOnRelease(ItemStack stack) {
-		return false;
-	}
 
 	@Override
 	public ActionResult use(World world, PlayerEntity user, Hand hand) {
 		var forward = user.getRotationVec(1);
+
+		// Play Sound
+		user.playSound(SoundEvents.ENTITY_FIREWORK_ROCKET_BLAST, 2f, 0.7f);
 
 		if (world instanceof ServerWorld serverWorld) {
 			var right = forward.crossProduct(new Vec3d(0, 1.7, 0));
