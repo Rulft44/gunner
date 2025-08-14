@@ -7,6 +7,8 @@ import io.github.rulft44.gunner.init.ModEnchantmentEffects;
 import io.github.rulft44.gunner.render.item.ConfettiGunGeoItemRenderer;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -53,7 +55,6 @@ public class ConfettiGunItem extends Item implements GeoItem {
 	public int getMaxUseTime(ItemStack stack, LivingEntity user) {
 		return 0;
 	}
-
 
 	@Override
 	public ActionResult use(World world, PlayerEntity user, Hand hand) {
