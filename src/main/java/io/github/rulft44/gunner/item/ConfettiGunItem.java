@@ -10,6 +10,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -54,6 +55,22 @@ public class ConfettiGunItem extends Item implements GeoItem {
 	@Override
 	public int getMaxUseTime(ItemStack stack, LivingEntity user) {
 		return 0;
+	}
+
+	@Override
+	public void inventoryTick(ItemStack stack, ServerWorld world, Entity entity, @Nullable EquipmentSlot slot) {
+		if (entity instanceof PlayerEntity player) {
+			boolean holding = player.getMainHandStack() == stack || player.getOffHandStack() == stack;
+
+			var attrInstance = player.getAttributeInstance(EntityAttributes.SAFE_FALL_DISTANCE);
+			if (attrInstance != null) {
+				if (holding) {
+					attrInstance.setBaseValue(100);
+				} else if (attrInstance.getBaseValue() == 100) {
+					attrInstance.setBaseValue(0);
+				}
+			}
+		}
 	}
 
 	@Override

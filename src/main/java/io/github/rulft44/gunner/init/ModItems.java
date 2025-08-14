@@ -36,11 +36,7 @@ public class ModItems {
 		return item;
 	}
 
-	public static final Item CONFETTI_GUN = register("confetti_gun", ConfettiGunItem::new, new Item.Settings().maxCount(1).enchantable(2).useCooldown(1f)
-		.component(DataComponentTypes.ATTRIBUTE_MODIFIERS, AttributeModifiersComponent.builder().add(EntityAttributes.SAFE_FALL_DISTANCE,
-			new EntityAttributeModifier(Identifier.of("safe_fall_distance"),
-			100, EntityAttributeModifier.Operation.ADD_VALUE),
-			AttributeModifierSlot.HAND).build()));
+	public static final Item CONFETTI_GUN = register("confetti_gun", ConfettiGunItem::new, new Item.Settings().maxCount(1).enchantable(2).useCooldown(1f));
 	public static final Item GUN_COMPONENT = register("gun_component", Item::new, new Item.Settings().maxCount(16));
 
 	public static final RegistryKey<ItemGroup> CUSTOM_ITEM_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Identifier.of(Gunner.ID, "item_group"));
