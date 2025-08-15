@@ -21,13 +21,13 @@
 		"minecraft": ">=${mc}",
 		"fabricloader": ">=${fl}",
 		"fabric-api": ">=${fapi}",
-		"cloth-config2": "*",
-		"geckolib": "*",
-		"confetti-lib": "*"
+		"cloth-config2": ">=${cloth}",
+		"geckolib": ">=${geckolib}",
+		"confetti": ">=${confetti}"
 	},
 	"suggests": {
 		"enchdesc": "*",
-		"modmenu": "*"
+		"modmenu": ">=${modmenu}"
 	},
 	"entrypoints": {
 		"main": [

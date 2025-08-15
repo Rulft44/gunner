@@ -1,5 +1,5 @@
 
-<img src="src/main/resources/assets/gunner/title.png" alt="title" width="50%" height="50%">
+<img src="src/main/resources/assets/gunner/title.png" alt="title" width="75%" height="75%">
 
 ---
 
