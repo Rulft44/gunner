@@ -61,7 +61,7 @@ dependencies {
 
 processResources {
 	final Map<String, String> meta = [
-		version       : modVersion,
+		version       : version,
 		modId         : modId,
 		modName       : modName,
 		modDescription: modDescription,
@@ -114,9 +114,9 @@ modrinth {
 	dependencies {
 		required.version "fabric-api", libs.versions.fapi.get()
 
-		required.project "geckolib"
+		required.version "geckolib", geckolibVersion
 
-		required.project "cloth-config"
+		required.version "cloth-config", clothConfigVersion
 	}
 }
 
