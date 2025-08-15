@@ -21,7 +21,7 @@
 		"minecraft": ">=${mc}",
 		"fabricloader": ">=${fl}",
 		"fabric-api": ">=${fapi}",
-		"cloth-config": "*",
+		"cloth-config2": "*",
 		"architectury": "*",
 		"geckolib": "*"
 	},
@@ -37,6 +37,9 @@
 		],
 		"fabric-datagen": [
 			"io.github.rulft44.gunner.ModDataGenerator"
+		],
+		"modmenu": [
+			"io.github.rulft44.gunner.compat.GunnerModMenuIntegration"
 		]
 	}
 }
