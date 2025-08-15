@@ -102,7 +102,7 @@ modrinth {
 	dependencies {
 		required.version libs.fapi.get().getName(), libs.versions.fapi.get()
 		required.version libs.geckolib.get().getName(), libs.versions.geckolib.get()
-		required.version libs.cloth.get().getName(), libs.versions.clothConfig.get()
+		required.version libs.cloth.get().getName(), libs.versions.clothConfig.get()+"+fabric"
 		optional.version libs.modmenu.get().getName(), libs.versions.modmenu.get()
 	}
 }
