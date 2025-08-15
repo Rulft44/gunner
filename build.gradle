@@ -101,6 +101,7 @@ modrinth {
 	syncBodyFrom = "<!--DO NOT EDIT MANUALLY: synced from gh readme-->\n" + rootProject.file("README.md").text
 	dependencies {
 		required.version libs.fapi.get().getName(), libs.versions.fapi.get()
+		required.version libs.confetti.get().getName(), libs.versions.confettiLib.get()
 		required.version libs.geckolib.get().getName()[0..-15], libs.versions.geckolib.get()
 		required.version libs.cloth.get().getName()[0..-8], libs.versions.clothConfig.get()+"+fabric"
 		optional.version libs.modmenu.get().getName(), libs.versions.modmenu.get()

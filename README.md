@@ -1,5 +1,5 @@
 
-<img src="src/main/resources/assets/gunner/title.png" alt="title" width="75%" height="75%">
+<img src="https://raw.githubusercontent.com/Rulft44/gunner/refs/heads/fabric-1.21.8/src/main/resources/assets/gunner/title.png" alt="title" width="75%" height="75%">
 
 ---
 
