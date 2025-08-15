@@ -112,11 +112,11 @@ modrinth {
 	changelog = "$System.env.CHANGELOG"
 	syncBodyFrom = "<!--DO NOT EDIT MANUALLY: synced from gh readme-->\n" + rootProject.file("README.md").text
 	dependencies {
-		required.version "fabric-api", libs.versions.fapi.get()
-
-		required.version "geckolib", geckolibVersion
-
-		required.version "cloth-config", clothConfigVersion
+		[
+			"fabric-api",
+			"geckolib",
+			"cloth-config"
+		]
 	}
 }
 
