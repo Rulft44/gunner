@@ -53,14 +53,9 @@ dependencies {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 
-	// Architectury API
-	modApi "dev.architectury:architectury-fabric:${architecturyVersion}"
-
 	// Mod Menu
 	modApi "com.terraformersmc:modmenu:${modMenuVersion}"
 
-	// REI (Testing purposes)
-	modImplementation "maven.modrinth:rei:20.0.811+fabric"
 
 }
 

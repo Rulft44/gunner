@@ -22,7 +22,6 @@
 		"fabricloader": ">=${fl}",
 		"fabric-api": ">=${fapi}",
 		"cloth-config2": "*",
-		"architectury": "*",
 		"geckolib": "*"
 	},
 	"suggests": {
