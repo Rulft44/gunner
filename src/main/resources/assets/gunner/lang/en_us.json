@@ -6,11 +6,19 @@
 
 	"enchantment.gunner.recoil": "Recoil",
 	"enchantment.gunner.recoil.desc": "Recoils you back when shooting.",
+	"enchantment.gunner.color_burst": "Color Burst",
+	"enchantment.gunner.color_burst.desc": "Makes the gun shoot fireworks.",
 
 	"tag.item.gunner.recoil_enchantable": "Recoil Enchantable",
+	"tag.item.gunner.color_burst_enchantable": "Color Burst Enchantable",
 
 	"text.autoconfig.gunner.title": "Confetti Gunner Config",
 	"text.autoconfig.gunner.option.gunSettings": "Confetti Gun Settings",
-	"text.autoconfig.gunner.option.gunSettings.recoilPower": "Recoil Power",
-	"text.autoconfig.gunner.option.gunSettings.recoilPower.@Tooltip": "Determines the base power of the Recoil enchantment."
+	"text.autoconfig.gunner.option.enchantSettings": "Enchantment Settings",
+	"text.autoconfig.gunner.option.enchantSettings.recoilPower": "Recoil Power",
+	"text.autoconfig.gunner.option.enchantSettings.fireworkPower": "Firework Power",
+	"text.autoconfig.gunner.option.enchantSettings.fireworkDuration": "Firework Duration",
+	"text.autoconfig.gunner.option.enchantSettings.recoilPower.@Tooltip": "Determines the base power of the Recoil enchantment.",
+	"text.autoconfig.gunner.option.enchantSettings.fireworkPower.@Tooltip": "Determines the speed of the firework projectile from the Color Burst enchantment.",
+	"text.autoconfig.gunner.option.enchantSettings.fireworkDuration.@Tooltip": "Determines the duration which the firework projectile stays in the air before exploding."
 }

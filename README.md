@@ -7,7 +7,7 @@ This mod adds, the **Confetti Gun** which shoots confetti, and fun enchantments.
 
 ### **Enchantments:**
 - **Recoil I-IV**: Makes the gun recoil
-
+- **Color Burst**: Makes the gun shoot fireworks
 
 ---
 

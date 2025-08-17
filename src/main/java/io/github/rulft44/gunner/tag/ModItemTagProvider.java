@@ -17,5 +17,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
 	protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
 		valueLookupBuilder(ModTags.Items.RECOIL_ENCHANTABLE)
 			.add(ModItems.CONFETTI_GUN);
+		valueLookupBuilder(ModTags.Items.COLOR_BURST_ENCHANTABLE)
+			.add(ModItems.CONFETTI_GUN);
 	}
 }

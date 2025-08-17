@@ -4,21 +4,17 @@ import io.github.rulft44.gunner.Gunner;
 import io.github.rulft44.gunner.item.ConfettiGunItem;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.AttributeModifierSlot;
-import net.minecraft.component.type.AttributeModifiersComponent;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemGroups;
-import net.minecraft.item.ItemStack;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.item.*;
+import net.minecraft.predicate.component.ComponentMapPredicate;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.random.Random;
 
 import java.util.function.Function;
 
@@ -26,10 +22,8 @@ public class ModItems {
 	public static Item register(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
 		// Create the item key.
 		RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(Gunner.ID, name));
-
 		// Create the item instance.
 		Item item = itemFactory.apply(settings.registryKey(itemKey));
-
 		// Register the item.
 		Registry.register(Registries.ITEM, itemKey, item);
 
@@ -43,22 +37,38 @@ public class ModItems {
 	public static final ItemGroup CUSTOM_ITEM_GROUP = FabricItemGroup.builder()
 		.icon(() -> new ItemStack(ModItems.CONFETTI_GUN))
 		.displayName(Text.translatable("itemGroup.gunner"))
-		//.texture(Identifier.of(Gunner.ID, "textures/item/gun_component"))
+		.entries((context, entries) -> {
+			entries.add(new ItemStack(ModItems.CONFETTI_GUN));
+			entries.add(new ItemStack(ModItems.GUN_COMPONENT));
+			addEnchantedBooks(context, entries);
+		})
 		.build();
 
+	private static void addEnchantedBooks(ItemGroup.DisplayContext context, ItemGroup.Entries entries) {
+		ItemStack recoilBook = new ItemStack(Items.ENCHANTED_BOOK);
+		ItemStack colorBurstBook = new ItemStack(Items.ENCHANTED_BOOK);
+		context.lookup()
+			.getOrThrow(RegistryKeys.ENCHANTMENT)
+			.getOptional(ModEnchantmentEffects.RECOIL)
+			.ifPresent(recoil -> recoilBook.addEnchantment(recoil, 1));
+		context.lookup()
+			.getOrThrow(RegistryKeys.ENCHANTMENT)
+			.getOptional(ModEnchantmentEffects.COLOR_BURST)
+			.ifPresent(colorBurst -> colorBurstBook.addEnchantment(colorBurst, 1));
+		entries.add(recoilBook);
+		entries.add(colorBurstBook);
+	}
+
 	public static void initialize() {
-			ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS)
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS)
 			.register((itemGroup) -> itemGroup.add(ModItems.CONFETTI_GUN));
-			ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS)
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS)
 			.register((itemGroup) -> itemGroup.add(ModItems.GUN_COMPONENT));
 
 		// Register the group.
 		Registry.register(Registries.ITEM_GROUP, CUSTOM_ITEM_GROUP_KEY, CUSTOM_ITEM_GROUP);
+	}
 
-		// Register items to the custom item group.
-		ItemGroupEvents.modifyEntriesEvent(CUSTOM_ITEM_GROUP_KEY).register(itemGroup -> {
-			itemGroup.add(ModItems.CONFETTI_GUN);
-			itemGroup.add(ModItems.GUN_COMPONENT);
-		});
+	private ModItems() {
 	}
 }

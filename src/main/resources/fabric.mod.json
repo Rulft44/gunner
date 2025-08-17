@@ -26,7 +26,6 @@
 		"confetti": ">=${confetti}"
 	},
 	"suggests": {
-		"enchdesc": "*",
 		"modmenu": ">=${modmenu}"
 	},
 	"entrypoints": {

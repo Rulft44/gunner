@@ -1,5 +1,6 @@
 package io.github.rulft44.gunner.enchantment;
 
+import io.github.rulft44.gunner.enchantment.effect.ColorBurstEnchantmentEffect;
 import io.github.rulft44.gunner.enchantment.effect.RecoilEnchantmentEffect;
 import io.github.rulft44.gunner.init.ModEnchantmentEffects;
 import io.github.rulft44.gunner.init.ModTags;
@@ -47,6 +48,31 @@ public class EnchantmentGenerator extends FabricDynamicRegistryProvider {
 					EnchantmentEffectTarget.ATTACKER,
 					EnchantmentEffectTarget.ATTACKER,
 					new RecoilEnchantmentEffect(EnchantmentLevelBasedValue.linear(0.4f, 0.2f)) // scale the enchantment linearly.
+				)
+		);
+
+		register(entries, ModEnchantmentEffects.COLOR_BURST, Enchantment.builder(
+					Enchantment.definition(
+						registries.getOrThrow(RegistryKeys.ITEM).getOrThrow(ModTags.Items.COLOR_BURST_ENCHANTABLE),
+						// this is the "weight" or probability of our enchantment showing up in the table
+						10,
+						// the maximum level of the enchantment
+						1,
+						// base cost for level 1 of the enchantment, and min levels required for something higher
+						Enchantment.leveledCost(1, 10),
+						// same fields as above but for max cost
+						Enchantment.leveledCost(1, 15),
+						// anvil cost
+						5,
+						// valid slots
+						AttributeModifierSlot.HAND
+					)
+				)
+				.addEffect(
+					EnchantmentEffectComponentTypes.POST_ATTACK, // bun
+					EnchantmentEffectTarget.ATTACKER,
+					EnchantmentEffectTarget.ATTACKER,
+					new ColorBurstEnchantmentEffect(EnchantmentLevelBasedValue.linear(0.4f, 0.2f)) // scale the enchantment linearly.
 				)
 		);
 	}

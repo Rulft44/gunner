@@ -9,6 +9,7 @@ import net.minecraft.util.Identifier;
 public class ModTags {
 	public static class Items {
 		public static final TagKey<Item> RECOIL_ENCHANTABLE = createTag("recoil_enchantable");
+		public static final TagKey<Item> COLOR_BURST_ENCHANTABLE = createTag("color_burst_enchantable");
 
 		private static TagKey<Item> createTag(String name) {
 			return TagKey.of(RegistryKeys.ITEM, Identifier.of(Gunner.ID, name));
