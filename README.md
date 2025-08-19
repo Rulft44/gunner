@@ -3,6 +3,10 @@
 
 ---
 
+[![Modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg)](https://modrinth.com/mod/gunner)
+[![Curseforge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg)](https://www.curseforge.com/minecraft/mc-mods/gunner)
+
+
 This mod adds, the **Confetti Gun** which shoots confetti, and fun enchantments.
 
 ### **Enchantments:**
