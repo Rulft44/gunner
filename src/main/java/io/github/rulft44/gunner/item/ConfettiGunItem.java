@@ -5,27 +5,25 @@ import dev.doublekekse.confetti.math.Vec3Dist;
 import dev.doublekekse.confetti.packet.ExtendedParticlePacket;
 import dev.doublekekse.confetti.particle.ConfettiOptions;
 import io.github.rulft44.gunner.Gunner;
+import io.github.rulft44.gunner.data.PlayerGunData;
 import io.github.rulft44.gunner.init.ModEnchantmentEffects;
 import io.github.rulft44.gunner.render.item.ConfettiGunGeoItemRenderer;
+import net.fabricmc.fabric.api.item.v1.FabricItem;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.FireworkExplosionComponent;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.consume.UseAction;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
@@ -53,35 +51,11 @@ public class ConfettiGunItem extends Item implements GeoItem{
 	}
 
 	@Override
-	public UseAction getUseAction(ItemStack stack) {
-		return UseAction.NONE;
-	}
-
-	@Override
-	public int getMaxUseTime(ItemStack stack, LivingEntity user) {
-		return 0;
-	}
-
-	@Override
-	public void inventoryTick(ItemStack stack, ServerWorld world, Entity entity, @Nullable EquipmentSlot slot) {
-		if (entity instanceof PlayerEntity player) {
-			boolean holding = player.getMainHandStack() == stack || player.getOffHandStack() == stack;
-
-			var attrInstance = player.getAttributeInstance(EntityAttributes.SAFE_FALL_DISTANCE);
-			if (attrInstance != null) {
-				if (holding) {
-					attrInstance.setBaseValue(100);
-				} else if (attrInstance.getBaseValue() == 100) {
-					attrInstance.setBaseValue(0);
-				}
-			}
-		}
-	}
-
-	@Override
 	public ActionResult use(World world, PlayerEntity user, Hand hand) {
-		var forward = user.getRotationVec(1);
+		Vec3d forward = user.getRotationVec(1);
 		ItemStack itemStack = user.getStackInHand(hand);
+
+		user.incrementStat(Stats.USED.getOrCreateStat(this));
 
 		// Play Sound
 		user.playSound(SoundEvents.ENTITY_FIREWORK_ROCKET_BLAST, 2f, 0.7f);
@@ -102,6 +76,7 @@ public class ConfettiGunItem extends Item implements GeoItem{
 			// Trigger Gun Spinning Animation
 			triggerAnim(user, GeoItem.getOrAssignId(itemStack, serverWorld), "fire_controller", "fire");
 
+			// Color Burst
 			if (hasEnchantment(itemStack, ModEnchantmentEffects.COLOR_BURST) && consumeAmmo(user, Items.FIREWORK_ROCKET)) {
 				Vec3d spawnPos = user.getEyePos().add(forward.multiply(0.5));
 				ItemStack firework = new ItemStack(Items.FIREWORK_ROCKET);
@@ -133,20 +108,21 @@ public class ConfettiGunItem extends Item implements GeoItem{
 				world.spawnEntity(rocket);
 			}
 
-			if (!user.isSneaking()) {
-				if(hasEnchantment(itemStack, ModEnchantmentEffects.RECOIL)){
-					int level = getLevel(itemStack, ModEnchantmentEffects.RECOIL);
-					float pitch = user.getPitch(1);
-					float pitchFactor = (pitch + 90F) / 180F;
-					float recoilAmount = level * Gunner.config.enchantSettings.recoilPower * pitchFactor;
-					Vec3d backward = forward.multiply(-recoilAmount);
-					double upwardBoost = 0.15 * pitchFactor * level;
-					Vec3d finalRecoil = new Vec3d(backward.x, backward.y + upwardBoost, backward.z);
+			// Recoil
+			if(!user.isSneaking() && hasEnchantment(itemStack, ModEnchantmentEffects.RECOIL)){
+				int level = getLevel(itemStack, ModEnchantmentEffects.RECOIL);
+				float pitch = user.getPitch(1);
+				float pitchFactor = (pitch + 90F) / 180F;
+				float recoilAmount = level * Gunner.config.enchantSettings.recoilPower * pitchFactor;
+				Vec3d backward = forward.multiply(-recoilAmount);
+				double upwardBoost = 0.15 * pitchFactor * level;
+				Vec3d finalRecoil = new Vec3d(backward.x, backward.y + upwardBoost, backward.z);
 
-					// Apply Recoil
-					user.addVelocity(finalRecoil.x, finalRecoil.y, finalRecoil.z);
-					user.velocityModified = true;
-				}
+				// Apply Recoil
+				user.addVelocity(finalRecoil.x, finalRecoil.y, finalRecoil.z);
+				user.velocityModified = true;
+
+				PlayerGunData.markUsed(user);
 			}
 		}
 

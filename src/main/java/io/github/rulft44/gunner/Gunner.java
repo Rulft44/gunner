@@ -2,10 +2,12 @@ package io.github.rulft44.gunner;
 
 import io.github.rulft44.gunner.config.ModConfig;
 import io.github.rulft44.gunner.config.ModConfigData;
+import io.github.rulft44.gunner.data.PlayerGunData;
 import io.github.rulft44.gunner.init.ModEnchantmentEffects;
 import io.github.rulft44.gunner.init.ModItems;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +16,7 @@ public class Gunner implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger(ID);
 
 	public static ModConfigData config;
+
 
 	@Override
 	public void onInitialize() {
@@ -24,5 +27,16 @@ public class Gunner implements ModInitializer {
 
 		ModConfig.register();
 		config = AutoConfig.getConfigHolder(ModConfigData.class).getConfig();
+
+		ServerTickEvents.END_SERVER_TICK.register(server -> {
+			for (var player : server.getPlayerManager().getPlayerList()) {
+				if (PlayerGunData.hasUsed(player)) {
+					player.fallDistance = 0.0F;
+					if (player.isOnGround()) {
+						PlayerGunData.clear(player);
+					}
+				}
+			}
+		});
 	}
 }

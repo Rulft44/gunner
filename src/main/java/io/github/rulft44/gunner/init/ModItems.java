@@ -50,7 +50,7 @@ public class ModItems {
 		context.lookup()
 			.getOrThrow(RegistryKeys.ENCHANTMENT)
 			.getOptional(ModEnchantmentEffects.RECOIL)
-			.ifPresent(recoil -> recoilBook.addEnchantment(recoil, 1));
+			.ifPresent(recoil -> recoilBook.addEnchantment(recoil, 4));
 		context.lookup()
 			.getOrThrow(RegistryKeys.ENCHANTMENT)
 			.getOptional(ModEnchantmentEffects.COLOR_BURST)
